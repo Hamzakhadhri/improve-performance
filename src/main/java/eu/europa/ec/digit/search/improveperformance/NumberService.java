@@ -49,15 +49,10 @@ public class NumberService {
 	public Integer findSmallestDuplicateImproved(List<Integer> data) {
 
 		Set<Integer> duplicates = new HashSet<>();
-		Integer smallestDuplicated = null;
-		for (Integer number : data) {
-			if (!duplicates.add(number)) {
-				if (smallestDuplicated == null || number < smallestDuplicated) {
-					smallestDuplicated = number;
-				}
-			}
-		}
-		return smallestDuplicated;
+
+		return data.stream()
+				.filter(value -> !duplicates.add(value))
+				.min(Integer::compareTo).orElse(null);
 	}
 
 
